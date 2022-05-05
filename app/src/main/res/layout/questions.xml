@@ -10,7 +10,7 @@
     <!---->
 
     <LinearLayout
-        android:id="@+id/card_insert_point"
+        android:id="@+id/Qcard_insert_point"
         android:layout_width="413dp"
         android:layout_height="630dp"
         android:orientation="vertical"
@@ -24,27 +24,17 @@
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+
+
     </LinearLayout>
 
     <Button
         android:id="@+id/add_question_button"
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="12dp"
         android:background="@drawable/circlebutton"
         android:text="+"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="28dp"
-        android:text="Questions"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteX="298dp"
+        tools:layout_editor_absoluteY="16dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

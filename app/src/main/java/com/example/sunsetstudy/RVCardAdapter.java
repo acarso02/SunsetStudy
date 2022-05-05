@@ -11,37 +11,43 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class RVAdapter extends RecyclerView.Adapter<RVAdapter.CardViewHolder> {
-    ArrayList<Project> projectList;
+public class RVCardAdapter extends RecyclerView.Adapter<RVCardAdapter.CardViewHolder> {
+    ArrayList<Card> cardList;
+    Project project;
     int count = 0;
     Context context;
 
-    public RVAdapter(Context ct, ArrayList<Project> projects){
+    public RVCardAdapter(Context ct, Project proj){
         context = ct;
-        projectList = projects;
-        count = projects.size();
+        project = proj;
+        cardList = project.getCardList();
+        count = cardList.size();
     }
 
     @NonNull
     @Override
     public CardViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.project_card, parent, false);
+        View view = inflater.inflate(R.layout.question_card, parent, false);
 
         return new CardViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CardViewHolder holder, int position) {
-        holder.myText1.setText(projectList.get(position).Name);
-        holder.myTextCount.setText(Integer.toString(projectList.get(position).getListLength()));
+    public void onBindViewHolder(@NonNull final CardViewHolder holder, final int position) {
+        holder.myText1.setText(project.getCard(position).getQuestion());
         holder.myView.setOnClickListener(new View.OnClickListener()
             {@Override
             public void onClick(View v){
-                RelativeLayout rl = v.findViewById(R.id.relative_layout);
-                rl.setBackgroundColor(Color.BLUE);
+                if(holder.disp == 'Q'){
+                    holder.myText1.setText(project.getCard(position).getAnswer());
+                    holder.disp = 'A';
+                }
+                else{
+                    holder.myText1.setText(project.getCard(position).getQuestion());
+                    holder.disp = 'Q';
+                }
             }});
     }
 
@@ -51,13 +57,13 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.CardViewHolder> {
     }
 
     public class CardViewHolder extends RecyclerView.ViewHolder{
-        TextView myText1, myTextCount;
+        TextView myText1;
         View myView;
+        char disp = 'Q';
 
         public CardViewHolder(@NonNull View itemView) {
             super(itemView);
             myText1 = itemView.findViewById(R.id.project_name);
-            myTextCount = itemView.findViewById(R.id.question_count);
             myView = itemView;
         }
     }
